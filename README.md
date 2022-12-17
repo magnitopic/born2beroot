@@ -1,16 +1,91 @@
-# Born2beroot - version 1
+# **Born2beroot**
 
-## UFW (Uncomplicated FireWall)
+These are some commands that will be usefull during the evaluation of the born2beroot proyect.
+
+## UFW _(Uncomplicated FireWall)_
 
 Configure port rule
 
 ```
-sudo ufw allow 4242
+ufw allow 4242
 ```
 
 Delete port rule
 
 ```
-sudo ufw status numbered
-sudo ufw delete <number>
+ufw status numbered
+ufw delete <number>
+```
+
+See opened ports
+
+```
+ufw status numbered
+```
+
+## Users and groups
+
+Create a new user
+
+```
+adduser <username>
+```
+
+Create a new group
+
+```
+addgroup <groupname>
+```
+
+Add user to group
+
+```
+adduser <username> <groupname>
+```
+
+Check which groups a user belongs to
+
+```
+groups <username>
+```
+
+Check password rules in users
+
+```
+chage -l <username>
+```
+
+## _hostname_
+
+Check current hostname
+
+```
+hostnamectl
+```
+
+### Change the hostname
+
+Set the hostname
+
+```
+hostnamectl set-hostname <new_hostname>
+```
+
+Change /etc/hosts file
+
+```
+vim /etc/hosts
+```
+
+```
+127.0.0.1       localhost
+127.0.0.1       <new_hostname>
+```
+
+## Password policy
+
+Open the configuration file
+
+```
+vim/etc/pam.d/common-password
 ```
