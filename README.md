@@ -2,6 +2,14 @@
 
 These are some commands that will be usefull during the evaluation of the born2beroot proyect.
 
+## Partitions
+
+See partitions
+
+```
+lsblk
+```
+
 ## UFW _(Uncomplicated FireWall)_
 
 Configure port rule
@@ -88,4 +96,14 @@ Open the configuration file
 
 ```
 vim /etc/pam.d/common-password
+```
+
+# Crontab
+
+Start / Stop
+
+```
+/etc/init.d/cron start
+
+/etc/init.d/cron stop
 ```
