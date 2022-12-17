@@ -15,9 +15,9 @@ mem_total=$(free --mega | awk '$1 == "Mem:" {print $2}')
 mem_per=$(free --mega | awk '$1 == "Mem:" {printf("%.2f", $3/$2*100)}')
 
 #Disk Usage
-disk_use=$(free --mega | awk '$1 == "Mem:" {print $3}')
-disk_total=$(free --mega | awk '$1 == "Mem:" {print $2}')
-disk_per=$(free --mega | awk '$1 == "Mem:" {printf("%.2f", $3/$2*100)}')
+disk_use=$(df -m | grep "/dev/" | grep -v "/boot" | awk '{disk_u += $3} END {print disk_u}')
+disk_total=$(df -m | grep "/dev/" | grep -v "/boot" | awk '{disk_t += $2} END {printf ("%.1f", disk_t/1024)}')
+disk_per=$(df -m | grep "/dev/" | grep -v "/boot" | awk '{disk_u += $3} {disk_t+= $2} END {printf("%d”, disk_u/disk_t*100)}')
 
 #CPU load
 cpu_load=$(vmstat | tail -1 | awk '{printf(“%.1f”, 100-$15)}')
