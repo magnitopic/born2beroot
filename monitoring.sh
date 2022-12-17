@@ -1,31 +1,61 @@
 #!/bin/bash
 
-echo -ne "\t#Architecture: "
-uname -a
-echo -ne "\t#CPU physical: "
-grep "physical id" /proc/cpuinfo | wc -l
-echo -ne "\t#vCPU: "
-grep “processor” /proc/cpuinfo | wc -l
-echo -ne "\t#Memory Usage: "
-free --mega | awk '$1 == "Mem:" {print $3}'
-echo -ne "\t#Disk Usage: "
+#Architecture
+archi=$(uname -a)
 
-echo -ne "\t#CPU load: "
-vmstat | tail -1 | awk '{printf(“%.1f”, 100-$15)}'
-echo -ne "\t#Last boot: "
-who -b | awk '{print $3 " " $4}'
-echo -ne "\t#LVM use: "
-if [ $(lsblk | grep "lvm" | wc -l ) -gt 0]
+#CPU physical
+cpuf=$(grep "physical id" /proc/cpuinfo | wc -l)
+
+#CPU virtual
+cpuv=$(grep “processor” /proc/cpuinfo | wc -l)
+
+#Memory usage
+mem_use=$(free --mega | awk '$1 == "Mem:" {print $3}')
+mem_total=$(free --mega | awk '$1 == "Mem:" {print $2}')
+mem_per=$(free --mega | awk '$1 == "Mem:" {printf("%.2f", $3/$2*100)}')
+
+#Disk Usage
+disk_use=$(free --mega | awk '$1 == "Mem:" {print $3}')
+disk_total=$(free --mega | awk '$1 == "Mem:" {print $2}')
+disk_per=$(free --mega | awk '$1 == "Mem:" {printf("%.2f", $3/$2*100)}')
+
+#CPU load
+cpu_load=$(vmstat | tail -1 | awk '{printf(“%.1f”, 100-$15)}')
+
+#Last boot
+lb=$(who -b | awk '$1 == "system" {print $3 " " $4}')
+
+#LVM use
+if [ $(lsblk | grep "lvm" | wc -l) -gt 0 ]
 then
-	echo yes
+	lvm=$(yes)
 else
-	echo no
+	lvm=$(no)
 fi
-echo -ne "\t#Connection TCP: "
 
-echo -ne "\t#User log: "
+#Connection TCP
+tcpc=$(ss -ta | grep ESTAB | wc -l)
 
-echo -ne "\t#Network: "
+#User log
+user_log=$(users | wc -w)
 
-echo -ne "\t#Sudo: "
+#Network
+ip=$(hostname -I)
+mac=$(ip link | grep "link/ether" | awk '{print $2}')
+#Sudo
+cmnd=$(journalctl -q | grep COMMAND | wc -l)
 
+wall "
+	#Architecture: $archi
+	#CPU physical: $cpuf
+	#vCPU: $cpuv
+	#Memory Usage: $mem_use/{$mem_total}MB ($mem_per)
+	#Disk Usage: $disk_use/{$disk_total}GB ($disk_per)
+	#CPU load: $cpu_load%
+	#Last boot: $lb
+	#LVM use: $vmm
+	#Connection TCP: $tcpc
+	#User log: $user_log
+	#Network: IP $ip ($mac)
+	#Sudo: $cmnd cmd
+"
