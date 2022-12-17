@@ -1,4 +1,4 @@
-# **Born2beroot**
+# Born2beroot
 
 These are some commands that will be usefull during the evaluation of the born2beroot proyect.
 
@@ -87,5 +87,5 @@ vim /etc/hosts
 Open the configuration file
 
 ```
-vim/etc/pam.d/common-password
+vim /etc/pam.d/common-password
 ```
