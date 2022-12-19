@@ -26,12 +26,7 @@ cpu_load=$(vmstat | tail -1 | awk '{printf("%.1f", 100-$15)}')
 lb=$(who -b | awk '$1 == "system" {print $3 " " $4}')
 
 #LVM use
-if [ $(lsblk | grep "lvm" | wc -l) -gt 0 ]
-then
-	lvm=$(yes)
-else
-	lvm=$(no)
-fi
+lvmu=$(if [ $(lsblk | grep "lvm" | wc -l) -gt 0 ]; then echo yes; else echo no;fi)
 
 #Connection TCP
 tcpc=$(ss -ta | grep ESTAB | wc -l)
@@ -49,12 +44,12 @@ wall "
 	#Architecture: $archi
 	#CPU physical: $cpuf
 	#vCPU: $cpuv
-	#Memory Usage: $mem_use/${mem_total}MB ($mem_per)
-	#Disk Usage: $disk_use/${disk_total}GB ($disk_per)
+	#Memory Usage: $mem_use/${mem_total}MB ($mem_per%)
+	#Disk Usage: $disk_use/${disk_total}GB ($disk_per%)
 	#CPU load: $cpu_load%
 	#Last boot: $lb
 	#LVM use: $vmm
-	#Connection TCP: $tcpc
+	#Connection TCP: $tcpc ESTABLISHED
 	#User log: $user_log
 	#Network: IP $ip ($mac)
 	#Sudo: $cmnd cmd
