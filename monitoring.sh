@@ -7,7 +7,7 @@ archi=$(uname -a)
 cpuf=$(grep "physical id" /proc/cpuinfo | wc -l)
 
 #CPU virtual
-cpuv=$(grep “processor” /proc/cpuinfo | wc -l)
+cpuv=$(grep "processor" /proc/cpuinfo | wc -l)
 
 #Memory usage
 mem_use=$(free --mega | awk '$1 == "Mem:" {print $3}')
@@ -17,10 +17,10 @@ mem_per=$(free --mega | awk '$1 == "Mem:" {printf("%.2f", $3/$2*100)}')
 #Disk Usage
 disk_use=$(df -m | grep "/dev/" | grep -v "/boot" | awk '{disk_u += $3} END {print disk_u}')
 disk_total=$(df -m | grep "/dev/" | grep -v "/boot" | awk '{disk_t += $2} END {printf ("%.1f", disk_t/1024)}')
-disk_per=$(df -m | grep "/dev/" | grep -v "/boot" | awk '{disk_u += $3} {disk_t+= $2} END {printf("%d”, disk_u/disk_t*100)}')
+disk_per=$(df -m | grep "/dev/" | grep -v "/boot" | awk '{disk_u += $3} {disk_t+= $2} END {printf("%d", disk_u/disk_t*100)}')
 
 #CPU load
-cpu_load=$(vmstat | tail -1 | awk '{printf(“%.1f”, 100-$15)}')
+cpu_load=$(vmstat | tail -1 | awk '{printf("%.1f", 100-$15)}')
 
 #Last boot
 lb=$(who -b | awk '$1 == "system" {print $3 " " $4}')
@@ -49,8 +49,8 @@ wall "
 	#Architecture: $archi
 	#CPU physical: $cpuf
 	#vCPU: $cpuv
-	#Memory Usage: $mem_use/{$mem_total}MB ($mem_per)
-	#Disk Usage: $disk_use/{$disk_total}GB ($disk_per)
+	#Memory Usage: $mem_use/${mem_total}MB ($mem_per)
+	#Disk Usage: $disk_use/${disk_total}GB ($disk_per)
 	#CPU load: $cpu_load%
 	#Last boot: $lb
 	#LVM use: $vmm
