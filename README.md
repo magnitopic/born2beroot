@@ -10,6 +10,20 @@ See partitions
 lsblk
 ```
 
+## SSH
+
+Service is runing
+
+```
+service ssh status
+```
+
+Connect via SSH
+
+```
+ssh alaparic@localhost -p 4242
+```
+
 ## UFW _(Uncomplicated FireWall)_
 
 Configure port rule
@@ -98,7 +112,7 @@ Open the configuration file
 vim /etc/pam.d/common-password
 ```
 
-# Crontab
+## Crontab
 
 Start / Stop
 
