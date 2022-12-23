@@ -26,6 +26,12 @@ Service is runing
 service ssh status
 ```
 
+Configuration file
+
+```
+/etc/ssh/sshd_config
+```
+
 Connect via SSH
 
 ```
