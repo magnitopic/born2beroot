@@ -2,6 +2,14 @@
 
 These are some commands that will be usefull during the evaluation of the born2beroot proyect.
 
+## Sudo
+
+Check that sudo is installed
+
+```
+apt-cache policy sudo
+```
+
 ## Partitions
 
 See partitions
@@ -82,7 +90,7 @@ chage -l <username>
 Check current hostname
 
 ```
-hostnamectl
+hostname
 ```
 
 ### Change the hostname
