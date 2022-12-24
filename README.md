@@ -2,12 +2,28 @@
 
 These are some commands that will be usefull during the evaluation of the born2beroot proyect.
 
+## Interfaz gráfica
+
+Comprovar que una interfaz gráfica está instalada
+
+```
+ls /usr/bin/*session
+```
+
+Respuesta esperada: `/usr/bin/dbus-run-session`
+
 ## Sudo
 
 Check that sudo is installed
 
 ```
 apt-cache policy sudo
+```
+
+Check the strong configuration for sudo
+
+```
+cat /etc/sudoers.d/sudo_config
 ```
 
 ## Partitions
@@ -43,13 +59,12 @@ ssh alaparic@localhost -p 4242
 Configure port rule
 
 ```
-ufw allow 4242
+ufw allow <number>
 ```
 
 Delete port rule
 
 ```
-ufw status numbered
 ufw delete <number>
 ```
 
@@ -91,6 +106,20 @@ Check password rules in users
 chage -l <username>
 ```
 
+## Password policy
+
+See password policy
+
+```
+vim /etc/pam.d/common-password
+```
+
+See password expiration
+
+```
+vim /etc/login.defs
+```
+
 ## _hostname_
 
 Check current hostname
@@ -101,21 +130,14 @@ hostname
 
 ### Change the hostname
 
-Set the hostname
+Chnage the current value for the new login in these two files
 
 ```
-hostnamectl set-hostname <new_hostname>
+vim /etc/hostname
 ```
-
-Change /etc/hosts file
 
 ```
 vim /etc/hosts
-```
-
-```
-127.0.0.1       localhost
-127.0.0.1       <new_hostname>
 ```
 
 ## Password policy
@@ -127,6 +149,12 @@ vim /etc/pam.d/common-password
 ```
 
 ## Crontab
+
+Open the crontab config file
+
+```
+crontab -u root -e
+```
 
 Start / Stop
 
