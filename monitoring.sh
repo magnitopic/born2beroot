@@ -20,7 +20,7 @@ disk_total=$(df -m | grep "/dev/" | grep -v "/boot" | awk '{disk_t += $2} END {p
 disk_per=$(df -m | grep "/dev/" | grep -v "/boot" | awk '{disk_u += $3} {disk_t+= $2} END {printf("%d", disk_u/disk_t*100)}')
 
 #CPU load
-cpu_load=$(vmstat | tail -1 | awk '{printf("%.1f", 100-$15)}')
+cpu_load=$(top -n 1 | grep "%Cpu(s)" | awk '{printf("%1.f", $2 + $4)}')
 
 #Last boot
 lb=$(who -b | awk '$1 == "system" {print $3 " " $4}')
