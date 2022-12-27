@@ -26,7 +26,7 @@ cpu_load=$(vmstat | tail -1 | awk '{printf("%.1f", 100-$15)}')
 lb=$(who -b | awk '$1 == "system" {print $3 " " $4}')
 
 #LVM use
-lvmu=$(if [ $(lsblk | grep "lvm" | wc -l) -gt 0 ]; then echo yes; else echo no;fi)
+vmu=$(if [ $(lsblk | grep "lvm" | wc -l) -gt 0 ]; then echo yes; else echo no;fi)
 
 #Connection TCP
 tcpc=$(ss -ta | grep ESTAB | wc -l)
