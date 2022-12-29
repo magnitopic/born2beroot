@@ -26,7 +26,7 @@ cpu_load=$(top -n 1 | grep "%Cpu(s)" | awk '{printf("%1.f", $2 + $4)}')
 lb=$(who -b | awk '$1 == "system" {print $3 " " $4}')
 
 #LVM use
-vmu=$(if [ $(lsblk | grep "lvm" | wc -l) -gt 0 ]; then echo yes; else echo no;fi)
+lvm=$(if [ $(lsblk | grep "lvm" | wc -l) -gt 0 ]; then echo yes; else echo no;fi)
 
 #Connection TCP
 tcpc=$(ss -ta | grep ESTAB | wc -l)
@@ -48,7 +48,7 @@ wall "
 	#Disk Usage: $disk_use/${disk_total}GB ($disk_per%)
 	#CPU load: $cpu_load%
 	#Last boot: $lb
-	#LVM use: $vmm
+	#LVM use: $lvm
 	#Connection TCP: $tcpc ESTABLISHED
 	#User log: $user_log
 	#Network: IP $ip ($mac)
