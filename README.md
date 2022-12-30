@@ -2,6 +2,14 @@
 
 These are some commands that will be usefull during the evaluation of the born2beroot proyect.
 
+## Machine signature
+
+Get the machine signature in *sha1* format
+
+```
+shasum born2beroot.vdi
+```
+
 ## Interfaz gráfica
 
 Comprovar que una interfaz gráfica está instalada
