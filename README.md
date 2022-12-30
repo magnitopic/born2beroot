@@ -20,6 +20,14 @@ ls /usr/bin/*session
 
 Respuesta esperada: `/usr/bin/dbus-run-session`
 
+## System details
+
+Show system details
+
+```
+crontab -u root -e
+```
+
 ## Sudo
 
 Check that sudo is installed
