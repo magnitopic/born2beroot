@@ -25,7 +25,7 @@ Respuesta esperada: `/usr/bin/dbus-run-session`
 Show system details
 
 ```
-crontab -u root -e
+uname -a
 ```
 
 ## Sudo
