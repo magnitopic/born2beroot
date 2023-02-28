@@ -10,15 +10,15 @@ Get the machine signature in *sha1* format
 shasum born2beroot.vdi
 ```
 
-## Interfaz gráfica
+## Graphical Interface
 
-Comprovar que una interfaz gráfica está instalada
+Checks if a graphical interface is installed
 
 ```
 ls /usr/bin/*session
 ```
 
-Respuesta esperada: `/usr/bin/dbus-run-session`
+Expected output for no GUI: `/usr/bin/dbus-run-session`
 
 ## System details
 
